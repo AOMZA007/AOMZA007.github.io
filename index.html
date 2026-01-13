@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tachaphong Saengsee | Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Kanit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        neon: {
+                            green: '#00ff41',
+                            cyan: '#0ea5e9',
+                            purple: '#d946ef'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-left: 4px solid #0ea5e9;
+            font-family: 'Fira Code', monospace;
+        }
+        .typing-cursor::after {
+            content: '|';
+            animation: cursor 1s infinite;
+        }
+        @keyframes cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500 selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i data-lucide="terminal" class="text-cyan-400 w-6 h-6"></i>
+                    <span class="font-mono font-bold text-xl tracking-tighter text-white">TS.Dev<span class="text-cyan-400">()</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="#about" class="hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#skills" class="hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Skills</a>
+                        <a href="#education" class="hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Education</a>
+                        <a href="#contact" class="hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Panel -->
+        <div class="md:hidden hidden bg-slate-900 border-b border-slate-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="hover:bg-slate-800 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="hover:bg-slate-800 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#skills" class="hover:bg-slate-800 block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#education" class="hover:bg-slate-800 block px-3 py-2 rounded-md text-base font-medium">Education</a>
+                <a href="#contact" class="hover:bg-slate-800 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <!-- Background Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="images/bg-hero.jpg" alt="Background" class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/90 to-slate-950"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center gap-12">
+            <div class="flex-1 text-center md:text-left">
+                <p class="font-mono text-cyan-400 mb-4 animate-pulse">Wait for it...</p>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+                    Hello, I'm <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Tachaphong Saengsee</span>
+                </h1>
+                <div class="text-xl md:text-2xl text-slate-400 mb-8 font-mono h-8 flex items-center justify-center md:justify-start">
+                    <span class="mr-2">></span>
+                    <span id="typing-text" class="typing-cursor"></span>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#contact" class="bg-cyan-600 hover:bg-cyan-500 text-white px-8 py-3 rounded-full font-medium transition-all shadow-lg shadow-cyan-500/30 flex items-center justify-center gap-2">
+                        <i data-lucide="mail"></i> Contact Me
+                    </a>
+                    <a href="#skills" class="border border-slate-600 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 px-8 py-3 rounded-full font-medium transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="code"></i> View Skills
+                    </a>
+                </div>
+            </div>
+            <div class="flex-1 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 animate-float">
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full blur-2xl opacity-30"></div>
+                    <img src="images/avatar.jpg" alt="Profile" class="relative w-full h-full object-cover rounded-full border-4 border-slate-800 shadow-2xl">
+                    
+                    <!-- Floating Tech Icons -->
+                    <div class="absolute -top-4 -right-4 bg-slate-800 p-3 rounded-full shadow-lg border border-slate-700">
+                        <i data-lucide="code-2" class="text-cyan-400 w-6 h-6"></i>
+                    </div>
+                    <div class="absolute bottom-4 -left-4 bg-slate-800 p-3 rounded-full shadow-lg border border-slate-700">
+                        <i data-lucide="database" class="text-purple-400 w-6 h-6"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+                <span class="text-cyan-400">01.</span> About Me
+                <div class="h-px bg-slate-700 flex-grow ml-4"></div>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div class="code-block p-6 rounded-lg text-sm md:text-base text-slate-300 overflow-x-auto shadow-xl">
+                    <div class="mb-2"><span class="text-purple-400">const</span> <span class="text-yellow-300">developer</span> = {</div>
+                    <div class="pl-4 mb-1">name: <span class="text-green-400">'Tachaphong Saengsee'</span>,</div>
+                    <div class="pl-4 mb-1">age: <span class="text-orange-400">21</span>,</div>
+                    <div class="pl-4 mb-1">education: <span class="text-green-400">'RMUTT'</span>,</div>
+                    <div class="pl-4 mb-1">major: <span class="text-green-400">'Computer Science'</span>,</div>
+                    <div class="pl-4 mb-1">traits: [<span class="text-green-400">'Responsible'</span>, <span class="text-green-400">'Fast Learner'</span>],</div>
+                    <div class="pl-4 mb-1">status: <span class="text-green-400">'Open to Work'</span></div>
+                    <div class="mb-2">};</div>
+                </div>
+
+                <div class="space-y-6">
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        สวัสดีครับ ผมชื่อ <span class="text-cyan-400 font-semibold">ธัชพงศ์ แสงสี</span> นักศึกษาสาขาวิทยาการคอมพิวเตอร์ ที่มีความหลงใหลในการพัฒนาเว็บไซต์และเทคโนโลยี
+                    </p>
+                    <p class="text-slate-400">
+                        ผมเป็นคนชอบเรียนรู้เทคโนโลยีใหม่ๆ มีทักษะในการวิเคราะห์และแก้ไขปัญหาอย่างเป็นระบบ ตรงต่อเวลา และพร้อมที่จะพัฒนาตนเองอยู่เสมอ
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="calendar" class="text-purple-400 w-5 h-5"></i>
+                            <span>16 Oct 2004 (21 Years)</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="map-pin" class="text-purple-400 w-5 h-5"></i>
+                            <span>Pakkret, Nonthaburi</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="graduation-cap" class="text-purple-400 w-5 h-5"></i>
+                            <span>RMUTT Student</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="languages" class="text-purple-400 w-5 h-5"></i>
+                            <span>Thai (Native)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3 justify-end">
+                Skills <span class="text-cyan-400">.02</span>
+                <div class="h-px bg-slate-700 flex-grow mr-4 order-first"></div>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Hard Skills -->
+                <div>
+                    <h3 class="text-xl font-mono text-cyan-400 mb-6 flex items-center gap-2">
+                        <i data-lucide="cpu"></i> Technical Skills
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- Skill Item -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 font-medium">HTML / CSS / Tailwind</span>
+                                <span class="text-cyan-400 font-mono">90%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2.5">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Item -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 font-medium">Python / Java</span>
+                                <span class="text-cyan-400 font-mono">80%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2.5">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Item -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 font-medium">JavaScript / PHP</span>
+                                <span class="text-cyan-400 font-mono">75%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2.5">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Item -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 font-medium">SQL / Database Design</span>
+                                <span class="text-cyan-400 font-mono">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2.5">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-4">
+                        <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3 border border-slate-700 hover:border-cyan-400 transition-colors">
+                            <i data-lucide="database" class="text-purple-400"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-200">Oracle SQL</h4>
+                                <p class="text-xs text-slate-400">Database</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3 border border-slate-700 hover:border-cyan-400 transition-colors">
+                            <i data-lucide="layout-template" class="text-purple-400"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-200">VS Code</h4>
+                                <p class="text-xs text-slate-400">Editor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div>
+                    <h3 class="text-xl font-mono text-purple-400 mb-6 flex items-center gap-2">
+                        <i data-lucide="brain-circuit"></i> Soft Skills
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full border border-slate-700 hover:border-purple-400 hover:text-white transition-all cursor-default">Problem Solving</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full border border-slate-700 hover:border-purple-400 hover:text-white transition-all cursor-default">Systematic Thinking</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full border border-slate-700 hover:border-purple-400 hover:text-white transition-all cursor-default">Time Management</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full border border-slate-700 hover:border-purple-400 hover:text-white transition-all cursor-default">Responsible</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full border border-slate-700 hover:border-purple-400 hover:text-white transition-all cursor-default">Punctual</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full border border-slate-700 hover:border-purple-400 hover:text-white transition-all cursor-default">Quick Learner</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full border border-slate-700 hover:border-purple-400 hover:text-white transition-all cursor-default">Interpersonal Skills</span>
+                        <span class="px-4 py-2 bg-slate-800 text-slate-300 rounded-full border border-slate-700 hover:border-purple-400 hover:text-white transition-all cursor-default">Open Minded</span>
+                    </div>
+
+                    <div class="mt-10 p-6 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl border border-slate-700 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-cyan-500 rounded-full blur-3xl opacity-10"></div>
+                        <h4 class="font-bold text-white mb-2 z-10 relative">My Philosophy</h4>
+                        <p class="text-slate-400 italic z-10 relative">
+                            "Learning never stops. I believe that every problem has a solution if we analyze it systematically and keep an open mind."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+                <span class="text-cyan-400">03.</span> Education
+                <div class="h-px bg-slate-700 flex-grow ml-4"></div>
+            </h2>
+
+            <div class="relative border-l-2 border-slate-700 ml-4 md:ml-6 space-y-12">
+                
+                <!-- Education Item 1 -->
+                <div class="relative pl-8 md:pl-12 group">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-900 border-2 border-cyan-400 group-hover:bg-cyan-400 transition-colors"></div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Bachelor's Degree</h3>
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-cyan-900/30 text-cyan-400 border border-cyan-900/50 mt-2 md:mt-0">2566 - Present</span>
+                    </div>
+                    <div class="text-purple-400 font-medium mb-2">Computer Science</div>
+                    <p class="text-slate-400">Rajamangala University of Technology Thanyaburi (RMUTT)</p>
+                    <p class="text-slate-500 text-sm mt-1">Faculty of Science and Technology</p>
+                </div>
+
+                <!-- Education Item 2 -->
+                <div class="relative pl-8 md:pl-12 group">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-900 border-2 border-slate-500 group-hover:border-cyan-400 transition-colors"></div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">High School</h3>
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-slate-800 text-slate-400 mt-2 md:mt-0">2563 - 2566</span>
+                    </div>
+                    <div class="text-purple-400 font-medium mb-2">Science-Math Program</div>
+                    <p class="text-slate-400">Pakkred Secondary School</p>
+                    <p class="text-slate-500 text-sm mt-1">GPA: 3.42</p>
+                </div>
+
+                <!-- Education Item 3 -->
+                <div class="relative pl-8 md:pl-12 group">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-900 border-2 border-slate-500 group-hover:border-cyan-400 transition-colors"></div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Junior High School</h3>
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-slate-800 text-slate-400 mt-2 md:mt-0">2560 - 2563</span>
+                    </div>
+                    <p class="text-slate-400">Pakkred Secondary School</p>
+                    <p class="text-slate-500 text-sm mt-1">GPA: 3.37</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-purple-600 rounded-full blur-[100px] opacity-20"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-4xl font-bold mb-6">Get In <span class="text-cyan-400">Touch</span></h2>
+            <p class="text-slate-400 mb-12 max-w-2xl mx-auto">
+                I am currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 text-left max-w-2xl mx-auto">
+                <!-- Contact Card 1 -->
+                <a href="mailto:tachaphongsaengsee@gmail.com" class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-cyan-400 transition-all hover:-translate-y-1 group">
+                    <div class="bg-slate-700 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition-colors">
+                        <i data-lucide="mail" class="text-cyan-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Email</h3>
+                    <p class="text-slate-400 text-sm break-all">tachaphongsaengsee@gmail.com</p>
+                </a>
+
+                <!-- Contact Card 2 -->
+                <a href="tel:0845206574" class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-cyan-400 transition-all hover:-translate-y-1 group">
+                    <div class="bg-slate-700 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition-colors">
+                        <i data-lucide="phone" class="text-cyan-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Phone</h3>
+                    <p class="text-slate-400 text-sm">084-520-6574</p>
+                </a>
+            </div>
+
+            <div class="mt-12 bg-slate-900/80 p-6 rounded-xl border border-dashed border-slate-700 inline-block text-left">
+                <div class="flex items-start gap-3">
+                    <i data-lucide="map-pin" class="text-purple-400 w-6 h-6 mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h4 class="text-white font-bold mb-1">Address</h4>
+                        <p class="text-slate-400">49/542 Moo 2, Chaengwattana Rd,<br>Soi Chaengwattana 28, Pakkret, Nonthaburi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-500 font-mono text-sm">
+                Designed & Built by <span class="text-cyan-400">Tachaphong Saengsee</span> © 2026
+            </p>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="#" class="text-slate-600 hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                <a href="#" class="text-slate-600 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <a href="#" class="text-slate-600 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Typing Effect
+        const words = ["Computer Science Student", "Web Developer", "Fast Learner", "Problem Solver"];
+        let i = 0;
+        let timer;
+
+        function typeWriter() {
+            const element = document.getElementById("typing-text");
+            const word = words[i];
+            let c = 0;
+            
+            // Clear text first
+            element.innerHTML = "";
+            
+            // Typing
+            const typeInterval = setInterval(() => {
+                element.innerHTML += word.charAt(c);
+                c++;
+                if (c >= word.length) {
+                    clearInterval(typeInterval);
+                    // Wait then delete
+                    setTimeout(() => {
+                        deleteWriter();
+                    }, 2000);
+                }
+            }, 100);
+        }
+
+        function deleteWriter() {
+            const element = document.getElementById("typing-text");
+            const word = words[i];
+            let c = word.length;
+            
+            const deleteInterval = setInterval(() => {
+                element.innerHTML = word.substring(0, c);
+                c--;
+                if (c < 0) {
+                    clearInterval(deleteInterval);
+                    i = (i + 1) % words.length;
+                    typeWriter();
+                }
+            }, 50);
+        }
+
+        // Start Typing
+        setTimeout(typeWriter, 1000);
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById("mobile-menu-btn");
+        const menu = document.getElementById("mobile-menu");
+
+        btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+        });
+
+        // Close mobile menu on click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Glass Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+</body>
+</html>
